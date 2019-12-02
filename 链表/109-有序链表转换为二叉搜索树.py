@@ -73,3 +73,35 @@ class Solution:
         node.right = self.sortedListToBST(mid.next)
 
         return node
+
+
+class Solution2:
+    def mapListToValues(self, head):
+        """将链表转换为list形式，快速得到中间节点"""
+        vals = []
+        while head:
+            vals.append(head.val)
+            head = head.next
+        return vals
+
+    def sortedListToBST(self, head):
+
+        values = self.mapListToValues(head)
+
+        def convertListToBST(l, r):
+            # l（left）大于r（right）的情况
+            if l > r:
+                return None
+            # 否则，得到中间节点的位置
+            mid = (l + r) // 2
+            # 初始化根节点，节点的值为mid的值
+            node = TreeNode(values[mid])
+            # 当 l== r 的情况
+            if l == r:
+                return node
+            # 递归调用
+            node.left = convertListToBST(l, mid - 1)
+            node.right = convertListToBST(mid + 1, r)
+            return node
+
+        return convertListToBST(0, len(values) - 1)
