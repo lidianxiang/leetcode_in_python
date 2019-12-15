@@ -1,5 +1,5 @@
 """
-给定一个 N 叉树，返回其节点值的前序遍历。
+给定一个 N 叉树，返回其节点值的后序遍历。
 
 例如，给定一个 3叉树 :
 
@@ -38,6 +38,7 @@ class Solution:
 
 
 class Solution2:
+    """递归法"""
     def postorder(self, root):
         res = []
         if not root:
@@ -45,5 +46,6 @@ class Solution2:
         for child in root.children:
             res.extend(self.postorder(child))
         res.append(root.val)
+
         return res
 
