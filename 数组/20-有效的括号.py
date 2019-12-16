@@ -44,8 +44,10 @@ class Solution:
                 stack.append(char)
             # len(stack)==0表示字符串只有‘]’,'}',')'，没有‘(','[','}'的情况，例如s=']'的情况
             # 否则弹出右括号（小、中、花）并映射到mapping中变成左括号，看看是否相等
-            elif len(stack) == 0 or mapping[stack.pop()] != char:
+            # elif len(stack) == 0 or mapping[stack.pop()] != char:
+            elif not stack or mapping[stack.pop()] != char:
                 return False
         # 最后，不是返回True，而是要判断长度是否为零
         # 要排除只有左括号的情况
-        return len(stack) == 0
+        # return len(stack) == 0
+        return not stack
