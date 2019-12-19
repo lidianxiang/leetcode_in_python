@@ -26,14 +26,15 @@
 
 
 # Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
+class TreeNode:
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
+
 
 class Solution:
-    def flatten(self, root: TreeNode) -> None:
+    def flatten(self, root):
         """
         Do not return anything, modify root in-place instead.
         """
@@ -44,7 +45,7 @@ class Solution:
             helper(root.left)
             helper(root.right)
 
-            if root.left != None:
+            if not root.left:
                 pre = root.left
                 while pre.right:
                     pre = pre.right
