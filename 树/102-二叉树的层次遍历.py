@@ -39,13 +39,15 @@ class Solution:
             return levels
 
         def helper(node, level):
+            # 第0层（root），创建一个空列表
             if len(levels) == level:
                 levels.append([])
-
+            # 每一层加上每层的节点值
             levels[level].append(node.val)
-
+            # 当左节点存在时，加上左节点的值
             if node.left:
                 helper(node.left, level + 1)
+            # 当右节点存在时，加上右节点的值
             if node.right:
                 helper(node.right, level + 1)
 
@@ -68,13 +70,16 @@ class Solution2:
             level_length = len(queue)
 
             for i in range(level_length):
+                # 双端队列，从左边弹出
                 node = queue.popleft()
+                # 从队列弹出后，加入levels中
                 levels[level].append(node.val)
-
+                # 当左节点存在时，将左节点加入队列中
                 if node.left:
                     queue.append(node.left)
+                # 当右节点存在时，将右节点加入队列中
                 if node.right:
                     queue.append(node.right)
-
+            # 层次加一
             level += 1
         return levels
