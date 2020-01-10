@@ -26,5 +26,19 @@ class Solution:
     2、map将会对(参数2：可迭代对象)中的每个元素运用并将结果按照顺序存在一个迭代器里面
     3、'*'可以对对象解包，[*map...] == list(map())
     """
-    def isIsomorphic(self, s: str, t: str) -> bool:
+    def isIsomorphic(self, s, t):
         return [*map(s.index, s)] == [*map(t.index, t)]
+
+
+class Solution2:
+    """哈希表"""
+    def isIsomorphic(self, s, t):
+        # 哈希表，key为s，value为t
+        hash_map = {}
+        for a, b in zip(s, t):
+            if a not in hash_map and b in hash_map.values():
+                return False
+            if a in hash_map and b != hash_map[a]:
+                return False
+            hash_map[a] = b
+        return True
