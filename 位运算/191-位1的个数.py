@@ -48,3 +48,29 @@ class Solution3:
             # n 右移一位
             n >>= 1
         return count
+
+
+class Solution4:
+    def hammingWeight(self, n):
+        # 结果
+        res = 0
+        mask = 1
+        # python整型为32为
+        for i in range(32):
+            # n & 1 等价于 n % 2 == 1
+            if n & mask:
+                # 计数加一
+                res += 1
+            # mask左移一位
+            mask = mask << 1
+        return res
+
+
+class Solution5:
+    def hammingWeight(self, n):
+        count = 0
+        while n != 0:
+            count += 1
+            # 这步操作的意思是： 消除掉n中最后的为1的位置
+            n &= n - 1
+        return count
