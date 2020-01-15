@@ -43,6 +43,8 @@ class Solution3:
     def hammingWeight(self, n):
         count = 0
         while n:
+            # n & 1 等价于 n % 2 == 1(判断是否位奇数)
             count += n & 1
+            # n 右移一位
             n >>= 1
         return count
