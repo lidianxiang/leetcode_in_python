@@ -19,16 +19,37 @@ class Solution:
 
     如果我们还剩一个位置，我们可以开始放一个左括号。 如果它不超过左括号的数量，我们可以放一个右括号。
     """
+
     def generateParenthesis(self, n):
         ans = []
 
-        def backtrack(S = '', left=0, right=0):
+        def backtrack(S='', left=0, right=0):
             if len(S) == 2 * n:
                 ans.append(S)
                 return
             if left < n:
-                backtrack(S+'(', left+1, right)
+                backtrack(S + '(', left + 1, right)
             if right < left:
-                backtrack(S+')',left, right+1)
+                backtrack(S + ')', left, right + 1)
+
         backtrack()
         return ans
+
+
+class Solution2:
+    """递归法"""
+    def generateParenthesis(self, n):
+        self.list = []
+        self._gen(0, 0, n, "")
+        return self.list
+
+    def _gen(self, left, right, n, result):
+        if left == n and right == n:
+            self.list.append(result)
+            return
+
+        if left < n:
+            self._gen(left + 1, right, n, result + '(')
+        # 当左括号的数量要大于右括号的数量且右括号的数量小于总数n
+        if left > right and right < n:
+            self._gen(left, right + 1, n, result + ')')
