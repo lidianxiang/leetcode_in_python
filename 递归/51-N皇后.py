@@ -44,3 +44,50 @@ class Solution:
         DFS([], [], [])
         # 两层列表推导式，输出答案
         return [['.' * i + 'Q' + '.' * (n - i - 1) for i in sol] for sol in result]
+
+
+class Solution2:
+    def solveNQueens(self, n):
+        # 特判
+        if n < 1:
+            return []
+        self.result = []
+        # 表示列方向
+        self.cols = set()
+        # pie表示负45度方向
+        self.pie = set()
+        # na表示45度方向
+        self.na = set()
+        # n表示queens的行数
+        self.DFS(n, 0, [])
+        return self._generate_result(n)
+
+    def DFS(self, n, row, cur_state):
+        # 终止条件
+        if row >= n:
+            self.result.append(cur_state)
+            return
+        # 逐行遍历
+        for col in range(n):
+            # 当列在原来的列上或者负45度方向原来有位置或者45度方向原来有位置
+            if col in self.cols or row + col in self.pie or row - col in self.na:
+                # 表示不是解，继续搜索
+                continue
+            # 否则这个是解，将列、pie和na的信息加入cols、pie、na中
+            self.cols.add(col)
+            self.pie.add(row + col)
+            self.na.add(row - col)
+            # 递归搜索下一行，将答案放入cur_state中
+            self.DFS(n, row + 1, cur_state + [col])
+            # 取出刚才列、pie和na的信息，恢复成原始状态
+            self.cols.remove(col)
+            self.pie.remove(row + col)
+            self.na.remove(row - col)
+
+    # 输出至特定格式的答案
+    def _generate_result(self, n):
+        board = []
+        for res in self.result:
+            for i in res:
+                board.append('.' * i + "Q" + '.' * (n - i - 1))
+        return [board[i:i + n] for i in range(0, len(board), n)]
