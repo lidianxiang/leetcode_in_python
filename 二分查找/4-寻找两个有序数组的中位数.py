@@ -44,16 +44,17 @@ class Solution:
                 imax = i - 1
             # 找到合适的i边界时
             else:
-                if i == 0:
+                if i == 0: # 确定左边界情况
                     max_of_left = nums2[j-1]
                 elif j == 0:
                     max_of_left = nums1[i-1]
                 else:
                     max_of_left = max(nums1[i-1], nums2[j-1])
 
-                if (m+n) % 2 == 1:
+                if (m+n) % 2 == 1: # 奇数的情况
                     return max_of_left
-                if i == m:
+
+                if i == m: # 确定右边界的情况
                     min_of_right = nums2[j]
                 elif j == n:
                     min_of_right = nums1[i]
