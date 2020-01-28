@@ -27,7 +27,7 @@ class Solution:
                 return True
             if nums[mid] == nums[right] == nums[left]:
                 left += 1
-                r -= 1
+                right -= 1
             # 当中间值大于等于左边值
             elif nums[mid] >= nums[left]:
                 if nums[left] <= target < nums[mid]:
