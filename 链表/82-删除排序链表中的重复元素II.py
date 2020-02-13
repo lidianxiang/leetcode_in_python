@@ -38,7 +38,7 @@ class Solution:
 class Solution2:
     """迭代 快慢指针,用快指针跳过那些有重复数组,慢指针负责和快指针拼接"""
     def deleteDuplicates(self, head: ListNode) -> ListNode:
-        if head == None or head.next == None:
+        if head is None or head.next is None:
             return head
         dummy = ListNode(-1)
         dummy.next = head
