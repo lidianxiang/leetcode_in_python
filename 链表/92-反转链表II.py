@@ -12,10 +12,10 @@
 
 
 # Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
+class ListNode:
+    def __init__(self, x):
+        self.val = x
+        self.next = None
 
 
 class Solution:
@@ -76,7 +76,8 @@ class Solution2:
             prev = cur
             cur = cur.next
             m, n = m - 1, n - 1
-        # 将tail和con指向cur和prev
+        # tail指针指向第m个节点，因为反转后它是反转部分的结尾，所以起名tail
+        # con指针指向第m-1节点，即第m个节点的前一个节点
         tail, con = cur, prev
         # 开始反转指定部分的链表
         while n:
@@ -93,3 +94,27 @@ class Solution2:
         # tail指向cur，完成最后的反转
         tail.next = cur
         return head
+
+
+class Solution3:
+    def reverseBetween(self, head, m, n):
+        # 特判
+        if head is None or head.next is None:
+            return head
+        # 哑节点
+        dummy = ListNode(-1)
+        dummy.next = head
+        head1 = dummy
+        # 前m-1个节点不用反转，
+        for i in range(m - 1):
+            head1 = head1.next
+        # 开始反转的开始节点
+        p = head1.next
+        # 在n - m节点中进行反转
+        for i in range(n - m):
+            tmp = head1.next
+            head1.next = p.next
+            p.next = p.next.next
+            head1.next.next = tmp
+        return dummy.next
+
