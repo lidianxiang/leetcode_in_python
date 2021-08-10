@@ -19,13 +19,12 @@ class ListNode:
 
 class Solution:
     def reverseList(self, head):
-        if not head or not head.next:
-            return head
 
-        pre = head
-        while head:
-            next = head.next  # 缓存当前节点的向后指针，待下次迭代用
-            head.next = pre  # 这一步是反转的关键，相当于把当前的向前指针作为当前节点的向后指针
-            pre = head  # 作为下次迭代时的（当前节点的）向前指针
-            head = next  # 作为下次迭代时的（当前）节点
+        pre = None
+        cur = head
+        while cur:
+            temp = cur.next  # 缓存当前节点的向后指针，待下次迭代用
+            cur.next = pre  # 这一步是反转的关键，相当于把当前的向前指针作为当前节点的向后指针
+            pre = cur  # 作为下次迭代时的（当前节点的）向前指针
+            cur = temp  # 作为下次迭代时的（当前）节点
         return pre  # 返回头指针，头指针就是迭代到最后一次时的head变量（赋值给了pre）
