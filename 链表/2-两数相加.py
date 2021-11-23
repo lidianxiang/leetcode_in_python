@@ -67,7 +67,7 @@ class Solutio2n(object):
             # a和b节点的值相加，如果有进位还要加上进位的值
             val = (a.val if a else 0) + (b.val if b else 0) + carry
             # 根据val判断是否有进位,不管有没有进位，val都应该小于10
-            carry, val = val / 10 if val >= 10 else 0, val % 10
+            carry, val = val // 10 if val >= 10 else 0, val % 10
             p, p.val = a if a else b, val
             # a和b指针都前进一位
             a, b = a.next if a else None, b.next if b else None
